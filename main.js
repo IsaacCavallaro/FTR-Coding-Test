@@ -1,51 +1,48 @@
 
-// Store inital user input for setting the number of seconds 
-let timer = [];
+// Store inital user input for setting the number of milliseconds in array - global scope
+let milliseconds = [];
 
-// Store all user input EXCEPT the inital setting of the number of seconds
-let allInput = []
+// Store conversion of milliseconds to seconds in array - global scope
+let secondsArray = [];
 
-// Function which runs when user clicks 'Start Here!' button
+// Store all user input EXCEPT the inital setting of the number of milliseconds and conversion to seconds
+let allInput = [];
+
+let seconds;
+
+// Function runs when user clicks 'Start Here!' button
 function startGame() {
   let timerInput = prompt("Please input the amount of time in seconds between emitting numbers and their frequency"); // Store the user input in a variable
-  timer.push(timerInput); // Push the user input into the timer array
-  // console.log(timer[0]);
-  displayTimer();
+  milliseconds.push(timerInput); // Push the user input into the milliseconds array for global scope
+  displayTimer(); // call displayTimer function
 }
 
 // Function to display user input for timer on screen
 function displayTimer() {
     let para = document.getElementById("timer"); // Select paragraph with the ID of "timer"
-    para.innerText = `Your selected timer inverval is: ${timer[0]} seconds` // Add text to the paragraph with the userInput stored in timer array
+    para.innerText = `Your selected timer inverval is: ${milliseconds[0]} seconds` // Add text to the paragraph with the userInput stored in timer array
     document.body.appendChild(para); // Append the text to be displayed on screen
-    // setInvervalPrompt(); // Call setIntervalPrompt function
+    conversion(); // Call conversion function
 }
 
-function setInvervalPrompt() {
-  const countdown = setInterval(countdownPrompt, (timer[0]) * 1000); 
-  let firstNumber = prompt("First Number");
-  allInput.push(firstNumber); // Push the first number into the allInput array
-  console.log("arrived")
+function conversion() {
+  convertToSeconds = milliseconds[0] * 1000 // Convert the user input from milliseconds to seconds
+  secondsArray.push(convertToSeconds); // Push the covertToSeconds value to seconds array for global scope
+  seconds = secondsArray[0]
+  // console.log(`this is ${seconds}`)
+  firstNumPrompt()
 }
 
-
-
-function countdownPrompt() {
-  console.log(allInput[0]);
-}
-
-
-
-
-
-
-
-// Function which runs after 'x' seconds  based on the user input
-function repeatPromt() {
-
+function firstNumPrompt() {
+  let numPrompt = prompt("Please enter the first number");
+  allInput.push(numPrompt);
+  setInterval(displayNumPrompt, seconds);
 }
 
 
+// function displayNumPrompt() {
+//   document.getElementById("number").innerHTML += "Hello";
+// }
 
 
 
