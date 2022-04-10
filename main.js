@@ -42,31 +42,20 @@ function countNumFrequency() {
     }
   }
 
-  let oneFrequency = Object.values(numFrequency).includes(1); // see if the object includes 1 as its value
-
-  // If the value is equal to 1, only display the number 
-  if (oneFrequency) {
-    for (const [key] of Object.entries(numFrequency)) {
+  // Display number and frequency with milliseconds delay
+  for (const [key, value] of Object.entries(numFrequency)) {
+    setInterval(function() {
       let para = document.getElementById("interval"); // Select paragraph with the ID of "interval"
-      para.innerText = `${key}` // Add text to the paragraph with the userInput stored in seconds variables
-      document.body.appendChild(para); // Append the text to be displayed on screen
-      // console.log(`${key}`);
-    }
-
-  } else { // If the value is not equal to 1, display the number and its value/frequency
-      for (const [key, value] of Object.entries(numFrequency)) {
-        let para = document.getElementById("interval"); // Select paragraph with the ID of "interval"
-        para.innerText = `${key}: ${value}` // Add text to the paragraph with the userInput stored in seconds variables
-        document.body.appendChild(para); // Append the text to be displayed on screen
-        // console.log(`${key}: ${value}`);
-      }
-  
+      para.innerText = `${key}: ${value}` // Add text to the paragraph with the userInput stored in seconds variables
+      document.body.appendChild(para);
+      }, milliseconds);
   }
-
-  function timer() {
-  let number = document.getElementById("number");
-  setInterval(function() {number.innerHTML += "Hello"}, milliseconds);
 }
+
+
+  // setInterval(function() {
+  //   element.innerHTML += "Hello"
+  //   }, milliseconds);
   
   // for (const [key, value] of Object.entries(numFrequency)) {
   //   let para = document.getElementById("interval"); // Select paragraph with the ID of "interval"
@@ -83,7 +72,7 @@ function countNumFrequency() {
   // para.innerText = `Your selected timer inverval is: ${seconds} seconds` // Add text to the paragraph with the userInput stored in seconds variables
   // document.body.appendChild(para); // Append the text to be displayed on screen
   
-}
+
 
 
 // function timer() {
