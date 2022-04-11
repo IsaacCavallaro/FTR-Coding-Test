@@ -4,6 +4,12 @@ let seconds = 0
 let num = 0
 let firstNum = document.getElementById("first-num")
 let nextNum = document.getElementById("next-num")
+let firstNumCount;
+let incrementbtn = document.createElement("button"); 
+
+const numArr = [];
+
+const numFrequency = {};
 
 
 function increment() {
@@ -29,27 +35,45 @@ function convert() {
 // Prompt user for first number
 function firstNumPrompt() {
   setTimeout(function() {
-    nextNum.textContent = "Please enter your first number:"
-
-    // Create Count 
-    let firstNumCount = document.createElement("h2");
-    firstNumCount.innerHTML = "0"
-    document.body.appendChild(firstNumCount);
-
-    // Create increment button
-    let increment = document.createElement("button");
-    increment.innerHTML = "INCREMENT";
-    document.body.appendChild(increment);
-
-    // Increment logic
-    increment.onclick = function () {
-      num += 1
-      countEl.textContent = seconds
-    };
-
-    // Create save button
-  }, 2000); // Wait
+    nextNum.textContent = "Please enter your first number:";
+    createCount();
+  }, 2000); // Wait 2 seonds
 }
+
+function createCount() {
+  // Set create count and set to 0
+  let firstNumCount = document.createElement("h2");
+  firstNumCount.innerHTML = "0"
+  document.body.appendChild(firstNumCount);
+  
+  // Add INCREMENT button
+  incrementbtn.innerHTML = "INCREMENT";
+  document.body.appendChild(incrementbtn);
+
+  // INCREMENT button logic
+  incrementbtn.addEventListener("click", function () {
+    num += 1
+    firstNumCount.textContent = num
+  });
+
+  //Create SAVE button 
+  let savebtn = document.createElement("button");  
+  savebtn.innerHTML = "SAVE";
+  document.body.appendChild(savebtn);
+
+  // SAVE button logic
+  savebtn.addEventListener("click", function () {
+    numArr.push(num)
+    console.log(numArr)
+  });
+
+}
+
+
+
+ // Increment logic
+    
+
 
 
 
