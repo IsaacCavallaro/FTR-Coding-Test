@@ -11,18 +11,21 @@ let paraDisplayNum;
 const numArr = [];
 const numFrequency = {};
 
+// Initial Quit function
 function quit() {
   alert("Thank you for playing")
-      clearInterval(displayInterval);
-      location.reload();
-      return;
+    clearInterval(displayInterval);
+    location.reload();
+    return;
 }
 
+// Initial Increment function
 function increment() {
   seconds += 1
   countEl.textContent = seconds
 }
 
+// Initial Save function
 function save() {
   let secondsStr = seconds 
   saveEl.textContent += secondsStr
@@ -43,14 +46,16 @@ function firstNumPrompt() {
   setTimeout(function() {
     firstNum.textContent = "Please enter your first number:";
 
-    // Set create count and set to 0
+    // Create Count h2 and set to 0
     let firstNumCount = document.createElement("h2");
     firstNumCount.innerHTML = "0"
     document.body.appendChild(firstNumCount);
+    firstNumCount.setAttribute("id","firstNumCount")
     
-    // Add INCREMENT button
+    // Create INCREMENT button with id of "firstNumIncrementbtn"
     incrementbtn.innerHTML = "INCREMENT";
     document.body.appendChild(incrementbtn);
+    incrementbtn.setAttribute("id","firstNumIncrementbtn");
 
     // INCREMENT button logic
     incrementbtn.addEventListener("click", function () {
@@ -58,27 +63,89 @@ function firstNumPrompt() {
       firstNumCount.textContent = num
     });
 
-    //Create SAVE button 
+    //Create SAVE button with id of firstNumSavebtn
     let savebtn = document.createElement("button");  
     savebtn.innerHTML = "SAVE";
+    savebtn.setAttribute("id","firstNumSavebtn");
     document.body.appendChild(savebtn);
 
     // SAVE button logic
     savebtn.addEventListener("click", function () {
       numArr.push(num);
-      console.log(numArr);
-      firstNumCount.textContent = 0 ;
-      num = 0;
+      // console.log(numArr);
+      firstNum.textContent = `Please enter your first number: ${num}`; // display first num to user
       nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
       countNumFrequency() // Call countNumFrequency when SAVE is clicked
+      removeFirstEl(); // Call removeFirstEl when SAVE is clicked
     });
   }, 2000); // Wait 2 seonds
+}
+
+function removeFirstEl(){
+  incrementbtn = document.getElementById("firstNumIncrementbtn"); // Select firstNumIncrementbtn
+  savebtn = document.getElementById("firstNumSavebtn"); // Select firstNumSavebtn
+  firstNumCount = document.getElementById("firstNumCount"); // Select firstNumCount
+
+  // Remove all three from screen
+  savebtn.remove(); 
+  incrementbtn.remove();
+  firstNumCount.remove();
+}
+
+function removeNextEl(){
+  nextIncrementbtn = document.getElementById("nextIncrementbtn"); // Select nextIncrementbtn
+  nextNumCount = document.getElementById("nextNumCount"); // Select nextNumCount
+  nextSaveBtn = document.getElementById("nextNumSavebtn"); // Select nextNumSavebtn
+
+  // Remove all three from screen
+  nextIncrementbtn.remove();
+  nextNumCount.remove();
+  nextSaveBtn.remove();
 }
 
 // Prompt user for next number
 function nextNumPrompt() {
   setTimeout(function() {
     nextNum.textContent = "Please enter your next number:";
+    num = 0
+
+    // Create count and set to 0
+    let nextNumCount = document.createElement("h2");
+    nextNumCount.setAttribute("id","nextNumCount");
+    nextNumCount.textContent = num
+    document.body.appendChild(nextNumCount);
+    
+
+    // Create INCREMENT button
+    let nextIncrementbtn = document.createElement("button");
+    nextIncrementbtn.setAttribute("id","nextIncrementbtn");
+    nextIncrementbtn.innerHTML = "INCREMENT";
+    document.body.appendChild(nextIncrementbtn);
+    
+
+    // INCREMENT button logic
+    nextIncrementbtn.addEventListener("click", function () {
+      num += 1
+      nextNumCount.textContent = num
+    });
+
+    //Create SAVE button 
+    let nextSavebtn = document.createElement("button");  
+    nextSavebtn.innerHTML = "SAVE";
+    nextSavebtn.setAttribute("id","nextNumSavebtn");
+    document.body.appendChild(nextSavebtn);
+
+    // SAVE button logic
+    nextSavebtn.addEventListener("click", function () {
+      numArr.push(num);
+      console.log(numArr);
+      firstNumCount.textContent = 0 ;
+      num = 0;
+      nextNumPrompt(); // Call nextNumPrompt when SAVE is clicked
+      countNumFrequency(); // Call countNumFrequency when SAVE is clicked
+      removeNextEl(); // Call removeNextEl when SAVE is clicked
+    });
+
   }, 2000); // Wait 2 seonds
 }
 
@@ -97,20 +164,72 @@ function countNumFrequency() {
       numFrequency[num] = 1; // Else set number to 1
     }
   }
-  displayNum()
+  console.log(numFrequency);
+  sortNumFrequency();
 }
 
-function displayNum() {
-  for (const [key, value] of Object.entries(numFrequency)) {
+////////////////////// sort object numFrequency /////////////////
+function sortNumFrequency() {
+  let sortable = [];
+  for (var userInput in numFrequency) {
+    sortable.push([userInput, numFrequency[userInput]]);
+  } 
+  console.log(numFrequency);
+  console.log(sortable);
+
+  sortable.sort(function(a, b) {
+    return b[1] - a[1];
+  });
+
+  console.log(sortable);
+
+  for (const element of sortable) {
+    console.log(element);
     paraDisplayNum = document.createElement("p");
-    paraDisplayNum.innerText = `${key}: ${value}` // Add text to the paragraph with the userInput stored in seconds variables
+    paraDisplayNum.innerText = `${element[0]}: ${element[1]}` ;
+    document.body.appendChild(paraDisplayNum);
   }
-
-  displayInterval = setInterval(function() {
-    document.body.appendChild(paraDisplayNum); // Display key and value on screen
-  }, milliseconds); // Delay based on first prompt (seconds variable)
-
 }
+
+
+
+
+  
+
+  // sortable.sort(function(a, b) {
+  //   let sorted = a[1] - b[1]
+  //   console.log(sorted);
+  // });
+
+  // paraDisplayNum = document.createElement("p");
+  // paraDisplayNum.innerText = sorted;
+  // document.body.appendChild(paraDisplayNum);
+
+
+  // displayInterval = setInterval(function() {
+  //   document.body.appendChild(paraDisplayNum); // Display key and value on screen
+  // }, milliseconds); // Delay based on first prompt (seconds variable)
+
+
+
+
+// function displayNum() {
+//   for (const [key, value] of Object.entries(numFrequency)) {
+//     paraDisplayNum = document.createElement("p");
+//     paraDisplayNum.innerText = `${key}: ${value}` // Add text to the paragraph with the userInput stored in seconds variables
+//   }
+
+//   displayInterval = setInterval(function() {
+//     document.body.appendChild(paraDisplayNum); // Display key and value on screen
+//   }, milliseconds); // Delay based on first prompt (seconds variable)
+
+// }
+
+
+
+
+
+
 
 
 // // Store all user input EXCEPT the inital setting of the number of milliseconds and conversion to seconds
