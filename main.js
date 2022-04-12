@@ -58,17 +58,19 @@ function convert() {
 function firstNumPrompt() {
   setTimeout(function() {
     firstNum.textContent = "Please enter your first number:";
+    firstNum.setAttribute("id","firstNum")
 
     // Create Count h2 and set to 0
     let firstNumCount = document.createElement("h2");
     firstNumCount.innerHTML = "0"
-    document.body.appendChild(firstNumCount);
     firstNumCount.setAttribute("id","firstNumCount")
+    document.getElementById("first-num-container").appendChild(firstNumCount); // append firstNumCount to "first-num-container"
+    
     
     // Create INCREMENT button with id of "firstNumIncrementbtn"
-    incrementbtn.innerHTML = "INCREMENT";
-    document.body.appendChild(incrementbtn);
-    incrementbtn.setAttribute("id","firstNumIncrementbtn");
+    incrementbtn.innerHTML = "INCREMENT"; // Set text of incrementbtn to "INCREMENT"
+    incrementbtn.setAttribute("id","firstNumIncrementbtn"); // Create id="firstNumIncrementbtn" 
+    document.getElementById("first-num-btn-wrapper").appendChild(incrementbtn); // append incrementbtn to "first-num-btn-wrapper"
 
     // INCREMENT button logic
     incrementbtn.addEventListener("click", function () {
@@ -78,9 +80,9 @@ function firstNumPrompt() {
 
     //Create SAVE button with id of firstNumSavebtn
     let savebtn = document.createElement("button");  
-    savebtn.innerHTML = "SAVE";
-    savebtn.setAttribute("id","firstNumSavebtn");
-    document.body.appendChild(savebtn);
+    savebtn.innerHTML = "SAVE"; // Set text of savebtn to "SAVE"
+    savebtn.setAttribute("id","firstNumSavebtn"); // Create id="firstNumSavebtn" 
+    document.getElementById("first-num-btn-wrapper").appendChild(savebtn); // append savebtn to "first-num-btn-wrapper"
 
     // SAVE button logic
     savebtn.addEventListener("click", function () {
@@ -88,6 +90,7 @@ function firstNumPrompt() {
       ///////// CHECK IF NUM FIB /////////
       if (isFibonacci) {
         let fib = document.createElement("p");
+        fib.setAttribute("id","fib");
         fib.innerHTML = "FIB";
         document.body.appendChild(fib);
         nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
@@ -132,18 +135,18 @@ function nextNumPrompt() {
     nextNum.textContent = "Please enter your next number:";
     num = 0
 
-    // Create count and set to 0
+    // Create count h2 and set to 0
     let nextNumCount = document.createElement("h2");
     nextNumCount.setAttribute("id","nextNumCount");
     nextNumCount.textContent = num
-    document.body.appendChild(nextNumCount);
+    document.getElementById("next-num-container").appendChild(nextNumCount); // append nextNumCount to "next-num-container"
     
 
     // Create INCREMENT button
     let nextIncrementbtn = document.createElement("button");
     nextIncrementbtn.setAttribute("id","nextIncrementbtn");
     nextIncrementbtn.innerHTML = "INCREMENT";
-    document.body.appendChild(nextIncrementbtn);
+    document.getElementById("next-num-btn-wrapper").appendChild(nextIncrementbtn); // append nextIncrementbtn to "next-num-btn-wrapper"
     
 
     // INCREMENT button logic
@@ -156,7 +159,7 @@ function nextNumPrompt() {
     let nextSavebtn = document.createElement("button");  
     nextSavebtn.innerHTML = "SAVE";
     nextSavebtn.setAttribute("id","nextNumSavebtn");
-    document.body.appendChild(nextSavebtn);
+    document.getElementById("next-num-btn-wrapper").appendChild(nextSavebtn); // append nextSavebtn to "next-num-btn-wrapper"
 
     // SAVE button logic
     nextSavebtn.addEventListener("click", function () {
