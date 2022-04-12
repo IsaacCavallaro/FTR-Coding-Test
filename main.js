@@ -1,3 +1,7 @@
+// Covert input from type string to number
+// Display on same line with ","
+// Resume button bug
+
 let saveEl = document.getElementById("save-el")
 let countEl = document.getElementById("count-el")
 let seconds = 0
@@ -29,22 +33,22 @@ function increment() {
 
 // Initial Save function
 function save() {
-  let secondsStr = seconds 
-  saveEl.textContent += secondsStr
+  // let secondsStr = seconds 
+  // saveEl.textContent += secondsStr
   countEl.textContent = seconds
+
+  // Select sav-btn and remove 
+  let saveBtn = document.getElementById("save-btn"); 
+  saveBtn.remove();
+
+  // Select increment-btn and remove 
+  let incrementBtn = document.getElementById("increment-btn");
+  incrementBtn.remove();
+
+  // Call convert function to convert input to milliseconds for setInterval
   convert()
 }
 
-// Fib function
-const isFibonacci = (num, count = 1, last = 0) => {
-  if(count < num){
-      return isFibonacci(num, count+last, count);
-  };
-  if(count === num){
-      return true;
-  }
-  return false;
-};
 
 // Convert user input from seconds to milliseconds
 function convert() {
@@ -54,9 +58,10 @@ function convert() {
   firstNumPrompt() // Call firstNumPrompt function
 }
 
+////////////////////////////////// First Number Prompt //////////////////////////////////
+
 // Prompt user for first number
 function firstNumPrompt() {
-  setTimeout(function() {
     firstNum.textContent = "Please enter your first number:";
     firstNum.setAttribute("id","firstNum")
 
@@ -74,8 +79,8 @@ function firstNumPrompt() {
 
     // INCREMENT button logic
     incrementbtn.addEventListener("click", function () {
-      num += 1
-      firstNumCount.textContent = num
+      num += 1 // Add one to num after each click
+      firstNumCount.textContent = num // Make the text content of firstNumCount equal to the number of clicks on incrementbtn
     });
 
     //Create SAVE button with id of firstNumSavebtn
@@ -86,36 +91,48 @@ function firstNumPrompt() {
 
     // SAVE button logic
     savebtn.addEventListener("click", function () {
-      numArr.push(num);
-      ///////// CHECK IF NUM FIB /////////
-      if (isFibonacci) {
-        let fib = document.createElement("p");
-        fib.setAttribute("id","fib");
-        fib.innerHTML = "FIB";
-        document.body.appendChild(fib);
-        nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
-        countNumFrequency() // Call countNumFrequency when SAVE is clicked
-        removeFirstEl(); // Call removeFirstEl when SAVE is clicked
-      }
-      else {
-        firstNum.textContent = `Please enter your first number: ${num}`; // display first num to user
-        nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
-        countNumFrequency() // Call countNumFrequency when SAVE is clicked
-        removeFirstEl(); // Call removeFirstEl when SAVE is clicked
-      }
+      numArr.push(num); // Push num to the end of numArr
+      isFibonacci(num); // Call isFibonacci and pass num as a parameter
+      removeFirstEl(); // Call removeFirstEl when SAVE is clicked
     });
-  }, 2000); // Wait 2 seonds
 }
+
+////////////////////////////////// Check for Fibonacci //////////////////////////////////
+
+// Fib function
+const isFibonacci = (num, count = 1, last = 0) => { // 
+
+  if(count < num){
+    isFibonacci(num, count+last, count);
+    console.log ("count is less than num")
+  };
+  if(count === num){
+      let fib = document.createElement("p");
+      fib.setAttribute("id","fib");
+      fib.innerHTML = "FIB";
+      document.body.appendChild(fib);
+      nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
+      countNumFrequency() // Call countNumFrequency when SAVE is clicked
+      removeFirstEl(); // Call removeFirstEl when SAVE is clicked
+  }
+  // nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
+  countNumFrequency() // Call countNumFrequency when SAVE is clicked
+  // removeFirstEl(); // Call removeFirstEl when SAVE is clicked
+};
+
+///////////// Remove elements from screen ////////////////
 
 function removeFirstEl(){
   incrementbtn = document.getElementById("firstNumIncrementbtn"); // Select firstNumIncrementbtn
-  savebtn = document.getElementById("firstNumSavebtn"); // Select firstNumSavebtn
+  savebtn = document.getElementById("first-num-btn-wrapper"); // Select firstNumSavebtn
   firstNumCount = document.getElementById("firstNumCount"); // Select firstNumCount
+  firstNum = document.getElementById("firstNum"); // Select firstNum
 
   // Remove all three from screen
   savebtn.remove(); 
   incrementbtn.remove();
   firstNumCount.remove();
+  firstNum.remove();
 }
 
 function removeNextEl(){
@@ -129,9 +146,10 @@ function removeNextEl(){
   nextSaveBtn.remove();
 }
 
+///////////// Next Prompt ////////////////
+
 // Prompt user for next number
 function nextNumPrompt() {
-  setTimeout(function() {
     nextNum.textContent = "Please enter your next number:";
     num = 0
 
@@ -171,8 +189,6 @@ function nextNumPrompt() {
       countNumFrequency(); // Call countNumFrequency when SAVE is clicked
       removeNextEl(); // Call removeNextEl when SAVE is clicked
     });
-
-  }, 2000); // Wait 2 seonds
 }
 
 // Count the frequency of the numbers stored in numFrequency Object

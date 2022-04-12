@@ -46,12 +46,11 @@ p {
   margin-bottom: 20px;
 }
 
-.inital-count {
+#inital-count {
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: 100vw;
-  margin-bottom: 20px;
 }
 
 .count-el-wrapper{
