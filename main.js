@@ -6,11 +6,17 @@ let firstNum = document.getElementById("first-num")
 let nextNum = document.getElementById("next-num")
 let firstNumCount;
 let incrementbtn = document.createElement("button"); 
+let paraDisplayNum;
 
 const numArr = [];
-
 const numFrequency = {};
 
+function quit() {
+  alert("Thank you for playing")
+      clearInterval(displayInterval);
+      location.reload();
+      return;
+}
 
 function increment() {
   seconds += 1
@@ -35,48 +41,76 @@ function convert() {
 // Prompt user for first number
 function firstNumPrompt() {
   setTimeout(function() {
-    nextNum.textContent = "Please enter your first number:";
-    createCount();
+    firstNum.textContent = "Please enter your first number:";
+
+    // Set create count and set to 0
+    let firstNumCount = document.createElement("h2");
+    firstNumCount.innerHTML = "0"
+    document.body.appendChild(firstNumCount);
+    
+    // Add INCREMENT button
+    incrementbtn.innerHTML = "INCREMENT";
+    document.body.appendChild(incrementbtn);
+
+    // INCREMENT button logic
+    incrementbtn.addEventListener("click", function () {
+      num += 1
+      firstNumCount.textContent = num
+    });
+
+    //Create SAVE button 
+    let savebtn = document.createElement("button");  
+    savebtn.innerHTML = "SAVE";
+    document.body.appendChild(savebtn);
+
+    // SAVE button logic
+    savebtn.addEventListener("click", function () {
+      numArr.push(num);
+      console.log(numArr);
+      firstNumCount.textContent = 0 ;
+      num = 0;
+      nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
+      countNumFrequency() // Call countNumFrequency when SAVE is clicked
+    });
   }, 2000); // Wait 2 seonds
 }
 
-function createCount() {
-  // Set create count and set to 0
-  let firstNumCount = document.createElement("h2");
-  firstNumCount.innerHTML = "0"
-  document.body.appendChild(firstNumCount);
-  
-  // Add INCREMENT button
-  incrementbtn.innerHTML = "INCREMENT";
-  document.body.appendChild(incrementbtn);
-
-  // INCREMENT button logic
-  incrementbtn.addEventListener("click", function () {
-    num += 1
-    firstNumCount.textContent = num
-  });
-
-  //Create SAVE button 
-  let savebtn = document.createElement("button");  
-  savebtn.innerHTML = "SAVE";
-  document.body.appendChild(savebtn);
-
-  // SAVE button logic
-  savebtn.addEventListener("click", function () {
-    numArr.push(num)
-    console.log(numArr)
-  });
-
+// Prompt user for next number
+function nextNumPrompt() {
+  setTimeout(function() {
+    nextNum.textContent = "Please enter your next number:";
+  }, 2000); // Wait 2 seonds
 }
 
+// Count the frequency of the numbers stored in numFrequency Object
+function countNumFrequency() {
 
+  // Loop over numFrequency Object and set values to 0 
+  for (const value in numFrequency) {
+    numFrequency[value] = 0;
+  }
 
- // Increment logic
-    
+  for (const num of numArr) { // Loop over numArr 
+    if (numFrequency[num]) { // Each time we loop, If the num is found in numFrequency Object add 1
+      numFrequency[num] += 1;
+    } else {                
+      numFrequency[num] = 1; // Else set number to 1
+    }
+  }
+  displayNum()
+}
 
+function displayNum() {
+  for (const [key, value] of Object.entries(numFrequency)) {
+    paraDisplayNum = document.createElement("p");
+    paraDisplayNum.innerText = `${key}: ${value}` // Add text to the paragraph with the userInput stored in seconds variables
+  }
 
+  displayInterval = setInterval(function() {
+    document.body.appendChild(paraDisplayNum); // Display key and value on screen
+  }, milliseconds); // Delay based on first prompt (seconds variable)
 
-
+}
 
 
 // // Store all user input EXCEPT the inital setting of the number of milliseconds and conversion to seconds
@@ -184,22 +218,7 @@ function createCount() {
 //   displayNum()
 // }
 
-// //////////////////////////// ONLY DISPLAYING FIRST OCCURANCE ///////////////////////////////////
-// function displayNum() {
 
-//   // Display number and frequency with appropriate seconds delay from seconds prompt
-//   for (const [key, value] of Object.entries(numFrequency)) { // Loop through numFrequency 
-//       displayInterval = setInterval(function() { // Set timer so object key and values appear with appropriate seconds delay from seconds prompt
-//         let para = document.getElementById("interval"); // Select paragraph with the ID of "interval"
-//         para.innerText = `${key}: ${value}` // Add text to the paragraph with the userInput stored in seconds variables
-//         document.body.appendChild(para); // Display key and value on screen
-//       }, milliseconds); // Delay based on first prompt (seconds variable)
-
-//       console.log(numFrequency);
-//       console.log(numArr)
-//       nextNumPrompt();
-//   }
-// }
 
 
 
