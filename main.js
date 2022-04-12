@@ -21,7 +21,6 @@ function quit() {
     return;
 }
 
-
 // Initial Increment function
 function increment() {
   seconds += 1
@@ -46,7 +45,6 @@ const isFibonacci = (num, count = 1, last = 0) => {
   }
   return false;
 };
-
 
 // Convert user input from seconds to milliseconds
 function convert() {

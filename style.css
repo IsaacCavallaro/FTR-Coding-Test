@@ -1,0 +1,31 @@
+h1 {
+  text-align: center;
+}
+
+.btn-content{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.main-btns{
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+}
+
+#frequency{
+  text-align: center;
+}
+
+.inital-count {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.count-el-wrapper{
+  display: flex;
+  justify-content: center;
+}

@@ -5,17 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FTR Coding Test</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
   
   <h1>FTR Coding Test</h1>
-  <p id="frequency">Please input the amount of time in seconds between emitting numbers and their frequency</p>
-  <h2 id="count-el">0</h2>
-  <button id="increment-btn" onclick="increment()">INCREMENT</button>
-  <button id="save-btn" onclick="save()">SAVE</button>
-  <button id="halt" onclick="halt()">HALT</button>
-  <button id="resume" onclick="resume()">RESUME</button>
-  <button id="quit" onclick="quit()">QUIT</button>
+  <section class="btn-content">
+    <div class="main-btns">
+      <button id="halt" onclick="halt()">HALT</button>
+      <button id="resume" onclick="resume()">RESUME</button>
+      <button id="quit" onclick="quit()">QUIT</button>
+    </div>
+  </section>
+
+  <section class="inital-count">
+    <div class="frequency-text">
+      <p id="frequency">Please input the amount of time in seconds between emitting numbers and their frequency</p>
+    </div>
+    <div class="count-el-wrapper">
+      <h2 id="count-el">0</h2>
+    </div>
+    <button id="increment-btn" onclick="increment()">INCREMENT</button>
+    <button id="save-btn" onclick="save()">SAVE</button>
+  </section>
+  
+  
 
   <p id="save-el">Your time in seconds is: </p>
 
