@@ -36,6 +36,18 @@ function save() {
   convert()
 }
 
+// Fib function
+const isFibonacci = (num, count = 1, last = 0) => {
+  if(count < num){
+      return isFibonacci(num, count+last, count);
+  };
+  if(count === num){
+      return true;
+  }
+  return false;
+};
+
+
 // Convert user input from seconds to milliseconds
 function convert() {
   let convertToMilliseconds = seconds * 1000 // Convert the user input from seconds to milliseconds
@@ -75,11 +87,21 @@ function firstNumPrompt() {
     // SAVE button logic
     savebtn.addEventListener("click", function () {
       numArr.push(num);
-      // console.log(numArr);
-      firstNum.textContent = `Please enter your first number: ${num}`; // display first num to user
-      nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
-      countNumFrequency() // Call countNumFrequency when SAVE is clicked
-      removeFirstEl(); // Call removeFirstEl when SAVE is clicked
+      /////////CHECK IF NUM FIB
+      if (isFibonacci) {
+        let fib = document.createElement("p");
+        fib.innerHTML = "FIB";
+        document.body.appendChild(fib);
+        nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
+        countNumFrequency() // Call countNumFrequency when SAVE is clicked
+        removeFirstEl(); // Call removeFirstEl when SAVE is clicked
+      }
+      else {
+        firstNum.textContent = `Please enter your first number: ${num}`; // display first num to user
+        nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
+        countNumFrequency() // Call countNumFrequency when SAVE is clicked
+        removeFirstEl(); // Call removeFirstEl when SAVE is clicked
+      }
     });
   }, 2000); // Wait 2 seonds
 }
