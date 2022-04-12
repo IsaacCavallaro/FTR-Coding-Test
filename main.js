@@ -87,7 +87,7 @@ function firstNumPrompt() {
     // SAVE button logic
     savebtn.addEventListener("click", function () {
       numArr.push(num);
-      /////////CHECK IF NUM FIB
+      ///////// CHECK IF NUM FIB /////////
       if (isFibonacci) {
         let fib = document.createElement("p");
         fib.innerHTML = "FIB";
