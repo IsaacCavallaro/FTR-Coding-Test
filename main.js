@@ -7,6 +7,8 @@ let nextNum = document.getElementById("next-num")
 let firstNumCount;
 let incrementbtn = document.createElement("button"); 
 let paraDisplayNum;
+let isHalt = false;
+let displayInterval;
 
 const numArr = [];
 const numFrequency = {};
@@ -18,6 +20,7 @@ function quit() {
     location.reload();
     return;
 }
+
 
 // Initial Increment function
 function increment() {
@@ -171,6 +174,7 @@ function countNumFrequency() {
 ////////////////////// sort object numFrequency /////////////////
 function sortNumFrequency() {
   let sortable = [];
+  // let isHalt = false;
   for (var userInput in numFrequency) {
     sortable.push([userInput, numFrequency[userInput]]);
   } 
@@ -185,14 +189,46 @@ function sortNumFrequency() {
 
   for (const element of sortable) {
     console.log(element);
-    paraDisplayNum = document.createElement("p");
-    paraDisplayNum.innerText = `${element[0]}: ${element[1]}` ;
-    document.body.appendChild(paraDisplayNum);
+    displayInterval = setInterval(function() {
+      if(!isHalt) {
+        paraDisplayNum = document.createElement("p");
+        paraDisplayNum.innerText = `${element[0]}: ${element[1]}` ;
+        document.body.appendChild(paraDisplayNum);
+      }
+    }, milliseconds);
   }
 }
 
+function halt() {
+  isHalt = true;
+  let haltText = document.createElement("p");  
+  haltText.innerHTML = "timer halted";
+  document.body.appendChild(haltText);
+}
 
+function resume() {
+  isHalt = false;
+  let resumeText = document.createElement("p");  
+  resumeText.innerHTML = "timer resumed";
+  document.body.appendChild(resumeText);
+  nextNumPrompt()
+}
 
+// var output = document.getElementById("h1");
+// var isPaused = false;
+// var time = 0;
+// var t = setInterval(function() {
+//     if(!isPaused) {
+//         time++;
+//         output.innerText = "Seconds: " + time;
+//     }
+// }, 1000);
+// function play(){
+//     isPaused = false;
+// }
+// function pause(){
+//     isPaused = true;
+// }
 
   
 
