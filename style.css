@@ -1,8 +1,13 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'poppins', sans-serif;
+  color: #eee
+}
+
+body {
+  background-color: #000;
 }
 
 h1 {
@@ -58,6 +63,7 @@ p {
 .increment-save-wrapper {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 /*********************************************** buttons ****************************************************************/
@@ -140,6 +146,7 @@ button:focus:not(:focus-visible):not(.focus-visible) {
 
 #firstNum{
   text-align: center;
+  margin: 10px;
 }
 
 #firstNumCount{
@@ -176,3 +183,56 @@ button:focus:not(:focus-visible):not(.focus-visible) {
   background-color: #f5cb42;
   margin-left: 5px;
 }
+
+#first-num-container {
+  /* border: 1px solid red; */
+}
+
+#first-num-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/*********************************************** NEXT NUMBER ****************************************************************/
+
+#next-num {
+  text-align: center;
+}
+
+#nextNumCount {
+  text-align: center;
+}
+
+#fib {
+  text-align: center;
+}
+
+#next-num-container {
+  /* border: 1px solid red; */
+}
+
+#nextIncrementbtn {
+  background-color: #2ea44f;
+  margin-right: 5px;
+}
+
+#nextIncrementbtn:hover {
+  background-color: #2c974b;
+}
+
+#nextIncrementbtn:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+#next-num-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  border: solid 5px solid blue;
+}
+
+#nextNumSavebtn {
+  background-color: #f5cb42;
+  margin-left: 5px;
+}
+
