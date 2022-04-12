@@ -58,6 +58,7 @@ function convert() {
 function firstNumPrompt() {
   setTimeout(function() {
     firstNum.textContent = "Please enter your first number:";
+    firstNum.setAttribute("id","firstNum")
 
     // Create Count h2 and set to 0
     let firstNumCount = document.createElement("h2");
@@ -68,7 +69,7 @@ function firstNumPrompt() {
     // Create INCREMENT button with id of "firstNumIncrementbtn"
     incrementbtn.innerHTML = "INCREMENT";
     document.body.appendChild(incrementbtn);
-    incrementbtn.setAttribute("id","firstNumIncrementbtn");
+    incrementbtn.setAttribute("id","firstNumIncrementbtn"); 
 
     // INCREMENT button logic
     incrementbtn.addEventListener("click", function () {
