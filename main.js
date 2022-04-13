@@ -14,6 +14,7 @@ let firstNumCount;
 let incrementbtn = document.createElement("button"); 
 let savebtn = document.createElement("button"); 
 let firstNumSavebtn = document.createElement("button");
+let fib = document.createElement("p");
 
 
 let paraDisplayNum;
@@ -47,6 +48,16 @@ function resume() {
   let resumeText = document.createElement("p");  
   resumeText.textContent = "timer resumed";
   document.body.appendChild(resumeText);
+
+  nextIncrementbtn = document.getElementById("nextIncrementbtn"); // Select nextIncrementbtn
+  nextIncrementbtn.remove();
+
+  nextNumCount = document.getElementById("nextNumCount"); // Select nextNumCount
+  nextNumCount.remove();
+
+  nextNumSaveBtn = document.getElementById("nextNumSavebtn"); // Select nextNumSavebtn
+  nextNumSaveBtn.remove();
+
   nextNumPrompt()
 }
 
@@ -126,7 +137,6 @@ function firstNumPrompt() {
     savebtn.addEventListener("click", function () {
       numArr.push(num); // Push num to the end of numArr
       isFibonacci(num); // Call isFibonacci and pass num as a parameter
-      // removeFirstEl(); // Call removeFirstEl when savebtn is clicked
 
       incrementbtn = document.getElementById("firstNumIncrementbtn"); // Select firstNumIncrementbtn
       incrementbtn.remove()
@@ -140,7 +150,6 @@ function firstNumPrompt() {
       firstNum = document.getElementById("firstNum"); // Select firstNum
       firstNumCount.remove();
 
-      // nextNumPrompt();
     });
 }
 
@@ -155,12 +164,13 @@ const isFibonacci = (num, count = 1, last = 0) => { //
   if(count === num){
       let fib = document.createElement("p"); // Create a paragraph element
       fib.setAttribute("id","fib"); // Give the paragraph id of "fib"
-      fib.textContent = "FIB"; // Set the text content of the paragrapht to "FIB"
-      document.body.appendChild(fib); // Append to the body
+      fib.textContent = "FIB "; // Set the text content of the paragrapht to "FIB"
+      fib.style.display = "inline"; // Set fib paragraph to inline
+      // document.body.appendChild(fib); // Append to the body
+      document.getElementById("interval").appendChild(fib);
       nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
       countNumFrequency() // Call countNumFrequency when SAVE is clicked
-      // removeFirstEl(); // Call removeFirstEl when SAVE is clicked
-  } 
+  }
   return
 };
 
@@ -201,6 +211,7 @@ function nextNumPrompt() {
   nextSavebtn.addEventListener("click", function () {
     numArr.push(num); // Push num to the end of numArr
     num = 0;
+    isFibonacci();
     nextNumPrompt(); // Call nextNumPrompt when SAVE is clicked
     countNumFrequency(); // Call countNumFrequency when SAVE is clicked
 
@@ -212,6 +223,7 @@ function nextNumPrompt() {
 
     nextNumSaveBtn = document.getElementById("nextNumSavebtn"); // Select nextNumSavebtn
     nextNumSaveBtn.remove();
+    
   });
 }
 
@@ -260,7 +272,7 @@ function sortNumFrequency() {
       if(!isHalt) {
         paraDisplayNum = document.createElement("p"); // Create paragraph
         paraDisplayNum.style.display = "inline"; // Set paragraph to inline
-        paraDisplayNum.innerText = `${element[0]}: ${element[1]},` ;
+        paraDisplayNum.innerText = `${element[0]}: ${element[1]}, ` ;
         document.body.appendChild(paraDisplayNum);
       }
     }, milliseconds);
