@@ -1,6 +1,7 @@
 // Covert input from type string to number
 // Resume button bug (delete what's on page if resumed?)
 // Print all numbers to screen when quit clicked
+// Need to remove FIB text when save is clicked
 
 
 let saveEl = document.getElementById("save-el")
