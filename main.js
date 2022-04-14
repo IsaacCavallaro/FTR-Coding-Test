@@ -1,6 +1,5 @@
 // Covert input from type string to number
 // Print all numbers to screen when quit clicked
-// Bug when first num is 10 or larger ONLY ON FIRST NUM SAVE
 // Stop Set Interval and restart 
 
 
@@ -30,15 +29,15 @@ const numFrequency = {};
 
 // Quit function
 function quit() {
-  alert("Thank you for playing")
-    clearInterval(displayInterval);
-    location.reload();
+  alert("Thank you for playing") // Thank you pop up message
+    clearInterval(displayInterval); // Stop timer when quit button is clicked
+    location.reload(); // Reload page when quit button is clicked
     return;
 }
 
 // Halt function
 function halt() {
-  isHalt = true;
+  isHalt = true; // Change isHalt to true 
   let haltText = document.createElement("p");  
   haltText.textContent = "timer halted";
   document.body.appendChild(haltText);
@@ -46,7 +45,7 @@ function halt() {
 
 // Resume function
 function resume() {
-  isHalt = false;
+  isHalt = false; // Change isHalt to false
   let resumeText = document.createElement("p");  
   resumeText.textContent = "timer resumed";
   document.body.appendChild(resumeText);
@@ -194,7 +193,6 @@ function nextNumPrompt() {
   ////// NEXT TO SET COUNT BACK TO 0 WITHOUT AFFECTING FIB CHECK
 
   nextNum.textContent = "Please enter your next number:";
-  console.log(nextNumValue)
 
   // Create count h2 and set to 0
   let nextNumCount = document.createElement("h2");
@@ -326,56 +324,48 @@ function sortNumFrequency() {
     return b[1] - a[1];
   });
 
-  console.log(sortable)
-  timer(sortable)
+  console.log(sortable.length)
+
+  // If sortable length is greater than 0 
+  if (sortable.length > 0) {
+    clearInterval(displayInterval); // stop the interval timer to prevent repoducing multiple timers with old values
+    display(sortable)
+  }
+  else {
+    display(sortable)
+  }
+  // console.log(sortable) 
 }
 
 /////////////////////////////////////////////////////// DISPLAY NUMBER AND FREQUENCY VIA SET INTERVAL  /////////////////////////////////////////////////////////////////////
 
-function timer(sortable) {
+
+function display(sortable){
   displayInterval = setInterval(function() {
-  loop(sortable);
-  }, milliseconds); 
-}
-
-function loop(sortable) {
-  for (const element of sortable) { // Loop over sortable  array
-    console.log(element);
-    paraDisplayNum = document.createElement("p"); // Create paragraph
-    paraDisplayNum.style.display = "inline"; // Set paragraph to inline
-    paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
-    console.log(sortable);
-    document.body.appendChild(paraDisplayNum);
-  }
-
+    if(!isHalt) { // if isHalt is false
+      for (const element of sortable) { // Loop over sortable array or arrays
+        console.log(element);
+        paraDisplayNum = document.createElement("p"); // Create paragraph
+        paraDisplayNum.style.display = "inline"; // Set paragraph to inline
+        paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; // Display index 0 and 1 of each element
+        document.body.appendChild(paraDisplayNum); // Append to body
+        console.log(sortable);
+      }
+    }
+  }, milliseconds);
 }
 
 
-  // displayInterval = setInterval(function() {
-  //   if(!isHalt) { // if isHalt is false
-  //     for (const element of sortable) { // Loop over sortable  array
-  //       console.log(element);
-  //       paraDisplayNum = document.createElement("p"); // Create paragraph
-  //       paraDisplayNum.style.display = "inline"; // Set paragraph to inline
-  //       paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
-  //       document.body.appendChild(paraDisplayNum);
-  //       console.log(sortable);
-  //     }
-  //   }
-  // }, milliseconds); // Display at an interval based on user input coverted from seconds to milliseconds
 
 
 
-// displayInterval = setInterval(function() {
-//   if(!isHalt) { // if isHalt is false
-//     for (const element of sortable) { // Loop over sortable  array
-//       console.log(element);
-//       paraDisplayNum = document.createElement("p"); // Create paragraph
-//       paraDisplayNum.style.display = "inline"; // Set paragraph to inline
-//       paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
-//       document.body.appendChild(paraDisplayNum);
-//       console.log(sortable);
-//     }
-//   }
-// }, milliseconds);
+
+
+    
+
+
+  
+
+
+
 
