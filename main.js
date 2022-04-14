@@ -9,6 +9,7 @@ let saveEl = document.getElementById("save-el")
 let countEl = document.getElementById("count-el")
 let seconds = 0
 let num = 0
+let nextNumValue = 0;
 let firstNum = document.getElementById("first-num")
 let nextNum = document.getElementById("next-num")
 let firstNumCount;
@@ -140,6 +141,7 @@ function firstNumPrompt() {
       console.log(num)
       isFibonacciFirst(num); // Call isFibonacci and pass num as a parameter
 
+      // Remove increment button, save button, count and prompt text
       incrementbtn = document.getElementById("firstNumIncrementbtn"); // Select firstNumIncrementbtn
       incrementbtn.remove()
 
@@ -163,9 +165,8 @@ function isPerfectSquare(x) {
     return (s * s == x);
 }
  
-// Returns true if n is a Fibonacci Number, else false
+// Returns true if num is a Fibonacci Number, else false
 function isFibonacciFirst(num){
-  
  
    if (isPerfectSquare(5 * num * num + 4) || isPerfectSquare(5 * num * num - 4)){
       let fib = document.createElement("p"); // Create a paragraph element
@@ -179,7 +180,7 @@ function isFibonacciFirst(num){
       countNumFrequency() // Call countNumFrequency when SAVE is clicked
    } 
    else {
-    console.log("arrived")
+    console.log("arrived: first num not fib")
     nextNumPrompt();
     countNumFrequency();
    }
@@ -189,13 +190,16 @@ function isFibonacciFirst(num){
 
 // Prompt user for next number
 function nextNumPrompt() {
+
+  ////// NEXT TO SET COUNT BACK TO 0 WITHOUT AFFECTING FIB CHECK
+
   nextNum.textContent = "Please enter your next number:";
-  num = 0
+  console.log(nextNumValue)
 
   // Create count h2 and set to 0
   let nextNumCount = document.createElement("h2");
   nextNumCount.setAttribute("id","nextNumCount");
-  nextNumCount.textContent = num
+  nextNumCount.textContent = "0"
   document.getElementById("next-num-container").appendChild(nextNumCount); // append nextNumCount to "next-num-container"
   
 
@@ -208,8 +212,8 @@ function nextNumPrompt() {
 
   // INCREMENT button logic
   nextIncrementbtn.addEventListener("click", function () {
-    num += 1
-    nextNumCount.textContent = num
+    nextNumValue += 1
+    nextNumCount.textContent = nextNumValue
   });
 
   //Create SAVE button 
@@ -221,8 +225,10 @@ function nextNumPrompt() {
 
   // SAVE button logic
   nextSavebtn.addEventListener("click", function () {
-    numArr.push(num); // Push num to the end of numArr
-    num = 0;
+    numArr.push(nextNumValue); // Push nextNum to the end of numArr
+    nextNumPrompt(); // Call nextNumPrompt when SAVE is clicked
+    countNumFrequency(); // Call countNumFrequency when SAVE is clicked
+    isFibonacciNext(nextNumValue)
 
     nextIncrementbtn = document.getElementById("nextIncrementbtn"); // Select nextIncrementbtn
     nextIncrementbtn.remove();
@@ -232,11 +238,6 @@ function nextNumPrompt() {
 
     nextNumSaveBtn = document.getElementById("nextNumSavebtn"); // Select nextNumSavebtn
     nextNumSaveBtn.remove();
-
-    
-    nextNumPrompt(); // Call nextNumPrompt when SAVE is clicked
-    countNumFrequency(); // Call countNumFrequency when SAVE is clicked
-    isFibonacciNext(num)
     
   });
 }
@@ -249,21 +250,22 @@ function isPerfectSquare(x) {
   return (s * s == x);
 }
 
-// Returns true if n is a Fibonacci Number, else false
-function isFibonacciNext(num){
+// Returns true if num is a Fibonacci Number, else false
+function isFibonacciNext(nextNumValue){
 
-// IF "FIB" ON PAGE REMOVE ELEMENT
-    nextIncrementbtn = document.getElementById("nextIncrementbtn"); // Select nextIncrementbtn
-    nextIncrementbtn.remove();
+  console.log(nextNumValue);
+  // Remove elements
+  nextIncrementbtn = document.getElementById("nextIncrementbtn"); // Select nextIncrementbtn
+  nextIncrementbtn.remove();
 
-    nextNumCount = document.getElementById("nextNumCount"); // Select nextNumCount
-    nextNumCount.remove();
+  nextNumCount = document.getElementById("nextNumCount"); // Select nextNumCount
+  nextNumCount.remove();
 
-    nextNumSaveBtn = document.getElementById("nextNumSavebtn"); // Select nextNumSavebtn
-    nextNumSaveBtn.remove();
+  nextNumSaveBtn = document.getElementById("nextNumSavebtn"); // Select nextNumSavebtn
+  nextNumSaveBtn.remove();
 
 
- if (isPerfectSquare(5 * num * num + 4) || isPerfectSquare(5 * num * num - 4)){
+ if (isPerfectSquare(5 * nextNumValue * nextNumValue + 4) || isPerfectSquare(5 * nextNumValue * nextNumValue - 4)){
     let fib = document.createElement("p"); // Create a paragraph element
     fib.setAttribute("id","fib"); // Give the paragraph id of "fib"
     fib.textContent = "FIB "; // Set the text content of the paragrapht to "FIB"
@@ -271,9 +273,20 @@ function isFibonacciNext(num){
     // document.body.appendChild(fib); // Append to the body
     document.getElementById("interval").appendChild(fib);
 
-    nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
-    countNumFrequency() // Call countNumFrequency when SAVE is clicked
+    resetNextNumValue();
  } 
+ else {
+  console.log("arrived next num is not fib")
+  resetNextNumValue();
+ }
+}
+
+/////////////////////////////////////////////////////// RESET NEXT NUMBER TO 0 /////////////////////////////////////////////////////////////////////
+
+function resetNextNumValue() {
+  nextNumValue = 0;
+  nextNumPrompt();
+  countNumFrequency();
 }
 
 /////////////////////////////////////////////////////// SET VALUES FOR OBJECT: numFrequency /////////////////////////////////////////////////////////////////////
