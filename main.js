@@ -16,6 +16,8 @@ let savebtn = document.createElement("button");
 let firstNumSavebtn = document.createElement("button");
 let fib = document.createElement("p");
 
+let quitArr;
+
 
 let paraDisplayNum;
 let isHalt = false; // Used for halt and resume button logic
@@ -29,9 +31,11 @@ const numFrequency = {};
 
 // Quit function
 function quit() {
-  alert("Thank you for playing") // Thank you pop up message
+  // alert("Thank you for playing") // Thank you pop up message
+    console.log("quit button clicked")
+    quitDisplay(quitArr)
     clearInterval(displayInterval); // Stop timer when quit button is clicked
-    location.reload(); // Reload page when quit button is clicked
+    // location.reload(); // Reload page when quit button is clicked
     return;
 }
 
@@ -324,7 +328,10 @@ function sortNumFrequency() {
     return b[1] - a[1];
   });
 
-  console.log(sortable.length)
+  quitArr = sortable
+  console.log(quitArr);
+
+  // console.log(sortable.length)
 
   // If sortable length is greater than 0 
   if (sortable.length > 0) {
@@ -353,6 +360,30 @@ function display(sortable){
       }
     }
   }, milliseconds);
+}
+
+
+function quitDisplay(quitArr) {
+
+  for (const element of quitArr) { // Loop over quitArr array or arrays
+    console.log(element);
+    paraDisplayNum = document.createElement("p"); // Create paragraph
+    paraDisplayNum.style.display = "inline"; // Set paragraph to inline
+    paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; // Display index 0 and 1 of each element
+    document.body.appendChild(paraDisplayNum); // Append to body
+    console.log(quitArr);
+  }
+
+  quitMessage = document.createElement("p"); // Create paragraph
+  quitMessage.style.display = "inline"; // Set paragraph to inline
+  quitMessage.textContent = "Thanks for playing, press any key to exit." ; // Display index 0 and 1 of each element
+  document.body.appendChild(quitMessage); // Append to body
+  document.addEventListener('keypress', refresh);
+  
+}
+
+function refresh() {
+  location.reload(); // Reload page when quit button is clicked
 }
 
 
