@@ -202,10 +202,6 @@ button:focus:not(:focus-visible):not(.focus-visible) {
   text-align: center;
 }
 
-#fib {
-  text-align: center;
-}
-
 #next-num-container {
   /* border: 1px solid red; */
 }
