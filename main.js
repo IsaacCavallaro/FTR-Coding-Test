@@ -177,12 +177,12 @@ function isFibonacciFirst(num){
       document.getElementById("interval").appendChild(fib);
 
       nextNumPrompt() // Call nextNumPrompt when SAVE is clicked
-      countNumFrequency() // Call countNumFrequency when SAVE is clicked
+      // countNumFrequency() // Call countNumFrequency when SAVE is clicked
    } 
    else {
     console.log("arrived: first num not fib")
     nextNumPrompt();
-    countNumFrequency();
+    // countNumFrequency();
    }
 }
  
@@ -227,7 +227,7 @@ function nextNumPrompt() {
   nextSavebtn.addEventListener("click", function () {
     numArr.push(nextNumValue); // Push nextNum to the end of numArr
     nextNumPrompt(); // Call nextNumPrompt when SAVE is clicked
-    countNumFrequency(); // Call countNumFrequency when SAVE is clicked
+    // countNumFrequency(); // Call countNumFrequency when SAVE is clicked
     isFibonacciNext(nextNumValue)
 
     nextIncrementbtn = document.getElementById("nextIncrementbtn"); // Select nextIncrementbtn
@@ -307,7 +307,7 @@ function countNumFrequency() {
     }
   }
 
-  sortNumFrequency();
+  sortNumFrequency(); // Call sortNumFrequency function
 }
 
 /////////////////////////////////////////////////////// SORT OBJECT IN DESCENDING ORDER AND DISPLAY AT SETINVERVAL /////////////////////////////////////////////////////////////////////
@@ -328,15 +328,15 @@ function sortNumFrequency() {
 
   console.log(sortable);
 
-  for (const element of sortable) {
-    console.log(element);
-    displayInterval = setInterval(function() {
-      if(!isHalt) { // if isHalt is false
+  
+  displayInterval = setInterval(function() {
+    if(!isHalt) { // if isHalt is false
+      for (const element of sortable) { // Loop over sortable array
         paraDisplayNum = document.createElement("p"); // Create paragraph
         paraDisplayNum.style.display = "inline"; // Set paragraph to inline
-        paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ;
+        paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
         document.body.appendChild(paraDisplayNum);
       }
-    }, milliseconds);
-  }
+    }
+  }, milliseconds); // Display at an interval based on user input coverted from seconds to milliseconds
 }
