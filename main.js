@@ -1,7 +1,4 @@
 // Covert input from type string to number
-// Print all numbers to screen when quit clicked
-// Stop Set Interval and restart 
-
 
 let saveEl = document.getElementById("save-el")
 let countEl = document.getElementById("count-el")

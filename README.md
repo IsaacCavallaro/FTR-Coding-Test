@@ -4,6 +4,16 @@
 
 ---
 
+## Description
+
+This is a test I received for my application as Junior Developer at For The Record.  The Overview, Part 1, Example and Part 2 are all directly lifted from what was sent to me. 
+
+I chose to do the coding test in the browser with Javascript which proved to be challenging with regards to not having the timer affected by user input. 
+
+I received the test Saturday 9th of April 2022 and deployed the first draft on Thursday the 14th of April.
+
+---
+
 ## Overview
 
 Thank you for taking the FTR Coding Test! The test has two parts, one in which you’ll be writing
