@@ -1,8 +1,7 @@
 // Covert input from type string to number
 // Print all numbers to screen when quit clicked
-// Need to remove FIB text when save is clicked
-// Display is isplay one pair and then all pairs
 // Bug when first num is 10 or larger ONLY ON FIRST NUM SAVE
+// Stop Set Interval and restart 
 
 
 let saveEl = document.getElementById("save-el")
@@ -25,6 +24,7 @@ let displayInterval;
 
 const numArr = [];
 const numFrequency = {};
+
 
 /////////////////////////////////////////////////////// QUIT, HALT, RESUME FUNCTIONS /////////////////////////////////////////////////////////
 
@@ -310,7 +310,7 @@ function countNumFrequency() {
   sortNumFrequency(); // Call sortNumFrequency function
 }
 
-/////////////////////////////////////////////////////// SORT OBJECT IN DESCENDING ORDER AND DISPLAY AT SETINVERVAL /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////// SORT OBJECT IN DESCENDING ORDER  /////////////////////////////////////////////////////////////////////
 function sortNumFrequency() {
   let sortable = []; // Set empty array to store arrays containing userInput and frequency 
  
@@ -326,17 +326,56 @@ function sortNumFrequency() {
     return b[1] - a[1];
   });
 
-  console.log(sortable);
-
-  
-  displayInterval = setInterval(function() {
-    if(!isHalt) { // if isHalt is false
-      for (const element of sortable) { // Loop over sortable array
-        paraDisplayNum = document.createElement("p"); // Create paragraph
-        paraDisplayNum.style.display = "inline"; // Set paragraph to inline
-        paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
-        document.body.appendChild(paraDisplayNum);
-      }
-    }
-  }, milliseconds); // Display at an interval based on user input coverted from seconds to milliseconds
+  console.log(sortable)
+  timer(sortable)
 }
+
+/////////////////////////////////////////////////////// DISPLAY NUMBER AND FREQUENCY VIA SET INTERVAL  /////////////////////////////////////////////////////////////////////
+
+function timer(sortable) {
+  displayInterval = setInterval(function() {
+  loop(sortable);
+  }, milliseconds); 
+}
+
+function loop(sortable) {
+  for (const element of sortable) { // Loop over sortable  array
+    console.log(element);
+    paraDisplayNum = document.createElement("p"); // Create paragraph
+    paraDisplayNum.style.display = "inline"; // Set paragraph to inline
+    paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
+    console.log(sortable);
+    document.body.appendChild(paraDisplayNum);
+  }
+
+}
+
+
+  // displayInterval = setInterval(function() {
+  //   if(!isHalt) { // if isHalt is false
+  //     for (const element of sortable) { // Loop over sortable  array
+  //       console.log(element);
+  //       paraDisplayNum = document.createElement("p"); // Create paragraph
+  //       paraDisplayNum.style.display = "inline"; // Set paragraph to inline
+  //       paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
+  //       document.body.appendChild(paraDisplayNum);
+  //       console.log(sortable);
+  //     }
+  //   }
+  // }, milliseconds); // Display at an interval based on user input coverted from seconds to milliseconds
+
+
+
+// displayInterval = setInterval(function() {
+//   if(!isHalt) { // if isHalt is false
+//     for (const element of sortable) { // Loop over sortable  array
+//       console.log(element);
+//       paraDisplayNum = document.createElement("p"); // Create paragraph
+//       paraDisplayNum.style.display = "inline"; // Set paragraph to inline
+//       paraDisplayNum.textContent = `${element[0]}: ${element[1]}, ` ; 
+//       document.body.appendChild(paraDisplayNum);
+//       console.log(sortable);
+//     }
+//   }
+// }, milliseconds);
+
