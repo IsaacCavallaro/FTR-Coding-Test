@@ -37,7 +37,8 @@ p {
 .main-btns{
   display: flex;
   width: 20%;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -133,10 +134,12 @@ button:focus:not(:focus-visible):not(.focus-visible) {
 
 #resume {
   background-color: #0051ba;
+  margin-right: 5px;
 }
 
 #halt {
   background-color: #7000ba;
+  margin-right: 5px;
 }
 
 #save-el {

@@ -16,7 +16,7 @@ let savebtn = document.createElement("button");
 let firstNumSavebtn = document.createElement("button");
 let fib = document.createElement("p");
 
-let quitArr;
+let quitArr = [];
 
 
 let paraDisplayNum;
@@ -32,11 +32,11 @@ const numFrequency = {};
 // Quit function
 function quit() {
   // alert("Thank you for playing") // Thank you pop up message
-    console.log("quit button clicked")
-    quitDisplay(quitArr)
-    clearInterval(displayInterval); // Stop timer when quit button is clicked
-    // location.reload(); // Reload page when quit button is clicked
-    return;
+  console.log("quit button clicked")
+  quitDisplay(quitArr)
+  clearInterval(displayInterval); // Stop timer when quit button is clicked
+  // location.reload(); // Reload page when quit button is clicked
+  return;
 }
 
 // Halt function
